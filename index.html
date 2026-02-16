@@ -3,60 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PUPPALA MOHAN - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Puppala Mohan | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #020617; 
+            --card-bg: #0f172a;
+            --accent: #a855f7; 
+            --accent-glow: rgba(168, 85, 247, 0.4);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --nav-bg: rgba(2, 6, 23, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: -10%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: var(--accent-glow);
+            filter: blur(120px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        header {
+            padding: 180px 0 100px;
+        }
+
+        .hero-badge {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--accent);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom right, #fff 30%, var(--text-dim));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-p {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            max-width: 650px;
+            margin-bottom: 2rem;
+        }
+
+        .quick-socials {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.3s;
+        }
+
+        .social-icon-link:hover {
+            color: var(--accent);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-weight: 800;
+        }
+
+        .section-title::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: linear-gradient(to right, rgba(168, 85, 247, 0.5), transparent);
+        }
+
+        .skills-grid, .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .skill-card, .contact-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .skill-card:hover, .contact-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px -10px rgba(168, 85, 247, 0.2);
+        }
+
+        .contact-card h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-featured {
+            background: linear-gradient(145deg, #0f172a, #020617);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            margin-bottom: 5rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            margin-right: 0.6rem;
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 2rem;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px var(--accent-glow);
+        }
+
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .project-featured { padding: 2rem; }
+        }
+    </style>
 </head>
 <body>
-    <header>
+
+    <nav>
         <div class="container">
-            <h1>PUPPALA MOHAN</h1>
-            <p>Computer Science Engineering Student | Passionate Developer</p>
-            <nav>
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+            <a href="#" class="logo"> <span>MOHAN</span></a>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
-    <section id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>Welcome to my website! I'm Puppala Mohan, a passionate coder and problem solver dedicated to transforming ideas into reality through technology. With a strong foundation in programming and a love for tackling complex challenges, I thrive on creating innovative solutions that make a difference. Whether it's developing software, optimizing algorithms, or diving into new technologies, I am always eager to learn and grow. Join me on this journey as I share my projects, insights, and the endless possibilities that coding can bring!</p>
-        </div>
-    </section>
+    <div class="container">
+        <header id="about">
+            <span class="hero-badge">B.Tech Final Year · CSE</span>
+            <h1>Puppala Mohan</h1>
+            <p class="hero-p">I'm an aspiring Software Engineer specialized in building modern web applications and solving complex algorithmic challenges with clean, efficient code.</p>
+            
+            <div class="quick-socials">
+                <a href="https://github.com/puppalamohan" class="social-icon-link" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/your-profile" class="social-icon-link" target="_blank">LinkedIn</a>
+                <a href="mailto:puppalamohanbabu@gmail.com" class="social-icon-link">Email</a>
+            </div>
 
-    <section id="projects">
-        <div class="container">
-            <h2>Projects</h2>
-            <div class="project-card">
-                <h3>Project Description</h3>
-                <p>Welcome to my web development portfolio! This website is a testament to my skills and passion for creating engaging and functional web applications. My projects leverage HTML5 and CSS3 to deliver stylish and responsive designs that enhance user experience and accessibility. Explore my work to see how I solve real-world problems and push the boundaries of technology!</p>
-                
-                <h4>Technologies Used</h4>
-                <ul>
-                    <li><strong>HTML5</strong>: Structured and semantic markup for a solid project foundation.</li>
-                    <li><strong>CSS3</strong>: Stylish and responsive designs that enhance user experience.</li>
-                </ul>
+            <a href="#" class="btn">Download CV</a>
+        </header>
 
-                <a href="https://github.com/puppalamohan?tab=repositories" class="btn">View Project</a>
+        <h2 class="section-title" id="skills">Technical Stack</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3 style="color: var(--accent); margin-bottom: 0.8rem;">Languages</h3>
+                <p>Python, Java, C++, HTML5, CSS3, JavaScript</p>
+            </div>
+            <div class="skill-card">
+                <h3 style="color: var(--accent); margin-bottom: 0.8rem;">Tools</h3>
+                <p>React.js, Git/GitHub, VS Code, Firebase, MySQL</p>
+            </div>
+            <div class="skill-card">
+                <h3 style="color: var(--accent); margin-bottom: 0.8rem;">Fundamentals</h3>
+                <p>Data Structures, Algorithms, DBMS, OS</p>
             </div>
         </div>
-    </section>
 
-    <section id="contact">
-        <div class="container">
-            <h2>Contact Me</h2>
-            <p>Email: <a href="mailto:your.email@example.com">puppalamohanbabu@gmail.com</a></p>
-            <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">yourprofile</a></p>
+        <h2 class="section-title" id="projects">Major Project</h2>
+        <div class="project-featured">
+            <span style="color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;">Final Year Project</span>
+            <h3 style="font-size: 2.2rem; margin: 0.8rem 0 1.2rem; font-weight: 800;">[Project Title]</h3>
+            <p style="color: var(--text-dim); margin-bottom: 2rem; font-size: 1.1rem;">
+                Briefly explain your B.Tech major project. What technology did you use and what problem did it solve?
+            </p>
+            <div>
+                <span class="tag">Java</span>
+                <span class="tag">Firebase</span>
+                <span class="tag">Architecture</span>
+            </div>
+            <a href="https://github.com/puppalamohan" class="btn" target="_blank">View Repository</a>
         </div>
-    </section>
+
+        <h2 class="section-title" id="contact">Let's Connect</h2>
+        <div class="contact-grid">
+            <a href="mailto:puppalamohanbabu@gmail.com" class="contact-card">
+                <h3>Email</h3>
+                <p>puppalamohanbabu@gmail.com</p>
+            </a>
+            <a href="https://linkedin.com/in/your-profile" target="_blank" class="contact-card">
+                <h3>LinkedIn</h3>
+                <p>Professional Profile</p>
+            </a>
+            <a href="https://github.com/puppalamohan" target="_blank" class="contact-card">
+                <h3>GitHub</h3>
+                <p>Check my code repositories</p>
+            </a>
+        </div>
+    </div>
 
     <footer>
-        <p>&copy; 2024 PUPPALA MOHAN. All Rights Reserved.</p>
+        <div class="container">
+            <p>&copy; 2026 Puppala Mohan Babu. Final Year Engineering Portfolio.</p>
+        </div>
     </footer>
+
 </body>
 </html>
